@@ -41,13 +41,13 @@
       font-size: $font-up-1;
       @media (max-width: 450px) {
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        font-size: $font-down-1;
       }
     }
 }
 
 .knowledge-explorer-items {
     //padding: 0.57em 1em 1em 0;
-
 
     a {
       color: var(--primary, $primary);
