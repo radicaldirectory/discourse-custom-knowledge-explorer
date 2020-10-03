@@ -3,12 +3,12 @@
     isBrowsing: false,
     actions: {
       toggleBrowsing() {
-		if (!this.isBrowsing) {
-		  this.set("isBrowsing", true);
-		} else {
-		  this.set("isBrowsing", false);
-		}
-	  }
+		    if (!this.isBrowsing) {
+		      this.set("isBrowsing", true);
+		    } else {
+		      this.set("isBrowsing", false);
+		    }
+	    }
     }
   });
 </script>
@@ -73,17 +73,17 @@
 </span>
 
 <div class="knowledge-explorer-expander-container">
-  {{d-button 
-    class="knowledge-explorer-expander" 
-    icon=(if expandedFilters "angle-up" "angle-down") 
-    action=toggleFiltersAction 
+  {{d-button
+    class="knowledge-explorer-expander"
+    icon=(if expandedFilters "angle-up" "angle-down")
+    action=toggleFiltersAction
     label="knowledge_explorer.tags"
   }}
-  {{d-button 
-    class="knowledge-explorer-browsing" 
-    icon=(if isBrowsing "angle-up" "angle-down") 
+  {{d-button
+    class="knowledge-explorer-browsing"
+    icon=(if isBrowsing "angle-up" "angle-down")
     action=toggleBrowsingAction
-    label=browsingLabel
+    label=(theme-prefix "browsingLabel")
   }}
 </div>
 
@@ -135,15 +135,15 @@
     toggleBrowsingAction=(action "toggleBrowsing")
     browsingLabel=browsingLabel
   }}
-  
+
   {{#conditional-loading-spinner condition=isLoading}}
-    
+
     {{#if emptyTopics}}
       <span class="no-topics-found">{{i18n 'knowledge_explorer.no_topics'}}</span>
     {{else}}
 
     <div class="knowledge-explorer-browse">
-      
+
       {{#if selectedTopic}}
         {{#conditional-loading-spinner condition=isTopicLoading}}
           {{knowledge-explorer-topic topic=topic return=(action "returnToList")}}
@@ -163,9 +163,9 @@
               </div>
             {{/if}}
           {{/if}}
-          
+
           {{#if filtered}}
-          
+
             {{#unless emptyResults}}
               {{knowledge-explorer-topic-list
                 topics=topics
@@ -177,11 +177,11 @@
                 loading=isLoadingMore
               }}
             {{/unless}}
-            
+
           {{else}}
-          
+
             {{#if isSearching}}
-            
+
               {{#unless emptyResults}}
                 {{knowledge-explorer-topic-list
                   topics=topics
@@ -193,9 +193,9 @@
                   loading=isLoadingMore
                 }}
               {{/unless}}
-              
+
             {{else}}
-            
+
               {{#if isBrowsing}}
                 {{#unless emptyResults}}
                   {{knowledge-explorer-topic-list
@@ -209,11 +209,11 @@
                   }}
                 {{/unless}}
               {{/if}}
-              
+
             {{/if}}
-            
+
           {{/if}}
-          
+
         </div>
       {{/if}}
     </div>
