@@ -93,7 +93,7 @@
 {{#if expandedFilters}}
   <div class="knowledge-explorer-items knowledge-explorer-tags-top">
 
-    <a {{action "toggleBrowsing"}} class="knowledge-explorer-item knowledge-explorer-tag {{if isBrowsing 'selected'}}">
+    <a {{action "toggleBrowsingAction"}} class="knowledge-explorer-item knowledge-explorer-tag {{if isBrowsing 'selected'}}">
       {{#unless isBrowsing}}
         {{d-icon "plus"}}
       {{/unless}}
@@ -150,6 +150,7 @@
     isBrowsing=isBrowsing
     toggleBrowsingAction=(action "toggleBrowsing")
     toggleBrowsing=toggleBrowsing
+    topics=topics
   }}
 
   {{#conditional-loading-spinner condition=isLoading}}
