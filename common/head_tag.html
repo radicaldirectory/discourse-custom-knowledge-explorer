@@ -1,0 +1,223 @@
+<script type="text/discourse-plugin" version="0.8">
+  api.modifyClass('controller:knowledge-explorer', {
+    isBrowsing: false,
+    actions: {
+      toggleBrowsing() {
+		if (!this.isBrowsing) {
+		  this.set("isBrowsing", true);
+		} else {
+		  this.set("isBrowsing", false);
+		}
+	  }
+    }
+  });
+</script>
+
+<script type="text/x-handlebars" data-template-name="javascripts/knowledge-explorer-topic-list-item.raw">
+<tr>
+  <td class="main-link">
+    <span class="link-top-line">
+      {{~raw "topic-status" topic=topic}}
+      {{~raw "knowledge-explorer-topic-link" topic=topic}}
+    </span>
+  </td>
+  <td>
+    <span class="link-bottom-line">
+      {{discourse-tags topic mode="list"}}
+    </span>
+  </td>
+</tr>
+</script>
+
+<script type="text/x-handlebars" data-template-name="javascripts/components/knowledge-explorer-topic-list">
+{{#load-more selector=".topic-list tr" action=loadMore}}
+  <table class="topic-list">
+    <thead>
+      <th {{action "sortListTitle"}}>
+        Groups
+        {{#if sortTitle}}
+          {{#if ascending}}
+            {{d-icon 'angle-up'}}
+          {{else}}
+            {{d-icon 'angle-down'}}
+          {{/if}}
+        {{/if}}
+      </th>
+      <th>
+        {{i18n 'knowledge_explorer.tags'}}
+      </th>
+    </thead>
+    <tbody>
+      {{#each topics as |topic|}}
+        {{raw "knowledge-explorer-topic-list-item" topic=topic}}
+      {{/each}}
+    </tbody>
+  </table>
+{{/load-more}}
+
+{{conditional-loading-spinner condition=loading}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="javascripts/components/knowledge-explorer-search">
+<span class="knowledge-explorer-search-wrapper">
+  {{input
+    type="text"
+    value=(readonly searchTerm)
+    input=(action "onSearchTermChange" value="target.value")
+    class="no-blur knowledge-explorer-search-bar"
+    autocorrect="off"
+    placeholder="Search"
+    autocapitalize="off"
+  }}
+  {{d-icon "search"}}
+</span>
+
+<div class="knowledge-explorer-expander-container">
+  {{d-button 
+    class="knowledge-explorer-expander" 
+    icon=(if expandedFilters "angle-up" "angle-down") 
+    action=toggleFiltersAction 
+    label="knowledge_explorer.tags"
+  }}
+  {{d-button 
+    class="knowledge-explorer-browsing" 
+    icon=(if isBrowsing "angle-up" "angle-down") 
+    action=toggleBrowsingAction
+    label=browsingLabel
+  }}
+</div>
+
+{{#if expandedFilters}}
+  <div class="knowledge-explorer-items knowledge-explorer-tags-top">
+    {{#each tags as |tag|}}
+      {{knowledge-explorer-tag
+        tag=tag
+        selectTag=selectTag
+      }}
+    {{/each}}
+  </div>
+{{/if}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="javascripts/components/knowledge-explorer-topic">
+{{d-button
+  label="knowledge_explorer.topic.back"
+  class="knowledge-explorer-nav-link return"
+  action=return
+}}
+
+<div class="topic-content">
+  <h1>{{topic.title}}</h1>
+  {{mount-widget
+    widget="post"
+    model=model
+    args=post
+  }}
+
+  {{share-popup topic=model.topic}}
+</div>
+
+{{plugin-outlet name="after-knowledge-explorer-topic"}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="javascripts/knowledge-explorer">
+<div class="knowledge-explorer">
+  {{plugin-outlet name="before-knowledge-explorer-search"}}
+
+  {{knowledge-explorer-search
+    searchTerm=(readonly searchTerm)
+    onSearch=(action "performSearch")
+    tags=tags
+    selectTag=(action "updateSelectedTags")
+    expandedFilters=expandedFilters
+    toggleFiltersAction=(action "toggleFilters")
+    isBrowsing=isBrowsing
+    toggleBrowsingAction=(action "toggleBrowsing")
+    browsingLabel=browsingLabel
+  }}
+  
+  {{#conditional-loading-spinner condition=isLoading}}
+    
+    {{#if emptyTopics}}
+      <span class="no-topics-found">{{i18n 'knowledge_explorer.no_topics'}}</span>
+    {{else}}
+
+    <div class="knowledge-explorer-browse">
+      
+      {{#if selectedTopic}}
+        {{#conditional-loading-spinner condition=isTopicLoading}}
+          {{knowledge-explorer-topic topic=topic return=(action "returnToList")}}
+        {{/conditional-loading-spinner}}
+      {{else}}
+        <div class="knowledge-explorer-results">
+          {{#if isSearchingOrFiltered}}
+            {{#if emptyResults}}
+              <div class="result-count no-result">
+                {{i18n 'search.no_results'}}
+              </div>
+            {{else}}
+              <div class="result-count">
+                {{i18n 'knowledge_explorer.search.results'
+                  count=searchCount
+                }}
+              </div>
+            {{/if}}
+          {{/if}}
+          
+          {{#if filtered}}
+          
+            {{#unless emptyResults}}
+              {{knowledge-explorer-topic-list
+                topics=topics
+                ascending=ascending
+                order=orderColumn
+                sortBy=(action "sortBy")
+                selectTopic=(action "setSelectedTopic")
+                loadMore=(action "loadMore")
+                loading=isLoadingMore
+              }}
+            {{/unless}}
+            
+          {{else}}
+          
+            {{#if isSearching}}
+            
+              {{#unless emptyResults}}
+                {{knowledge-explorer-topic-list
+                  topics=topics
+                  ascending=ascending
+                  order=orderColumn
+                  sortBy=(action "sortBy")
+                  selectTopic=(action "setSelectedTopic")
+                  loadMore=(action "loadMore")
+                  loading=isLoadingMore
+                }}
+              {{/unless}}
+              
+            {{else}}
+            
+              {{#if isBrowsing}}
+                {{#unless emptyResults}}
+                  {{knowledge-explorer-topic-list
+                    topics=topics
+                    ascending=ascending
+                    order=orderColumn
+                    sortBy=(action "sortBy")
+                    selectTopic=(action "setSelectedTopic")
+                    loadMore=(action "loadMore")
+                    loading=isLoadingMore
+                  }}
+                {{/unless}}
+              {{/if}}
+              
+            {{/if}}
+            
+          {{/if}}
+          
+        </div>
+      {{/if}}
+    </div>
+    {{/if}}
+{{/conditional-loading-spinner}}
+</div>
+</script>

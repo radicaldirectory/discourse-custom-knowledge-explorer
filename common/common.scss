@@ -1,0 +1,107 @@
+.knowledge-explorer-search {
+    display: grid;
+    grid-template-columns: auto minmax(250px, 900px) auto;
+    grid-template-areas:
+        ". search ."
+        ". expander ."
+        ". tags .";
+    padding-top: 4em;
+    
+    .knowledge-explorer-search-wrapper {
+      grid-area: search;
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
+      .knowledge-explorer-search-bar {
+        font-size: $font-up-4;
+      }
+    }
+    
+    .knowledge-explorer-expander-container {
+        grid-area: expander;
+    }
+    
+    .knowledge-explorer-tags-top {
+      grid-area: tags;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      padding: 2em 0;
+      grid-gap: 0.5rem;
+      font-size: $font-up-1;
+    }
+}
+
+.knowledge-explorer-items {
+    //padding: 0.57em 1em 1em 0;
+
+    a {
+      color: var(--primary, $primary);
+      white-space: nowrap;
+    }
+
+    h3 {
+      padding-left: 0.35em;
+      font-size: $font-up-1;
+    }
+
+    .knowledge-explorer-item-count {
+      margin-left: auto;
+      color: var(--primary-high, $primary-high);
+      font-size: $font-down-1;
+    }
+
+    .knowledge-explorer-item {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 0.25em 0.5em;
+
+      .d-icon {
+        height: 1em;
+        padding-bottom: 0.15em;
+        margin-right: 0.25em;
+        color: var(--primary-high, $primary-high);
+        &.d-icon-plus {
+          height: 0.75em;
+          margin-right: 0.25em;
+        }
+      }
+      &:hover {
+        background: var(--highlight-medium, $highlight-medium);
+      }
+      &.selected:hover {
+        background: var(--danger-low, $danger-low);
+        .d-icon {
+          color: var(--danger, $danger);
+        }
+      }
+      .tag-id,
+      .category-id {
+        margin-right: 3px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+    .selected {
+      font-weight: bold;
+    }
+  }
+
+.knowledge-explorer-browse {
+    max-width: 824px;
+    margin: 0 auto;
+    .loading-container {
+        justify-content: center;
+    }
+    margin-bottom: 8em;
+    .topic-avatar, .topic-meta-data {
+        display:none;
+    }
+    .knowledge-explorer-topic-list {
+      .discourse-tags {
+        font-size: $font-0;
+      }
+    }
+}
+
+
