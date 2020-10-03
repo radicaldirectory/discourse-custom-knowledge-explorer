@@ -93,7 +93,7 @@
 {{#if expandedFilters}}
   <div class="knowledge-explorer-items knowledge-explorer-tags-top">
 
-    <a {{action "toggleBrowsing"}} class="knowledge-explorer-item knowledge-explorer-tag {{if tag.active 'selected'}} {{if subtag 'subtag'}}">
+    <a {{action "toggleBrowsing"}} class="knowledge-explorer-item knowledge-explorer-tag {{if isBrowsing 'selected'}}">
       {{#unless isBrowsing}}
         {{d-icon "plus"}}
       {{/unless}}
