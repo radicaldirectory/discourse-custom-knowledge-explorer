@@ -20,7 +20,7 @@
 
     .knowledge-explorer-expander-container {
         grid-area: expander;
-        margin: 0 auto;
+        margin: 0 auto 1em auto;
         width: initial;
         justify-self: center;
     }
@@ -99,18 +99,21 @@
   }
 
 .knowledge-explorer-browse {
-    max-width: 824px;
-    margin: 0 auto;
-    .loading-container {
-        justify-content: center;
-    }
-    margin-bottom: 8em;
-    .topic-avatar, .topic-meta-data {
-        display:none;
-    }
-    .knowledge-explorer-topic-list {
-      .discourse-tags {
-        font-size: $font-0;
+  max-width: 824px;
+  margin: 0 auto;
+  .loading-container {
+    justify-content: center;
+  }
+  margin-bottom: 8em;
+  .topic-avatar, .topic-meta-data {
+    display:none;
+  }
+  .knowledge-explorer-topic-list {
+    .discourse-tags {
+      font-size: $font-0;
+      @media (max-width: 450px) {
+        font-size: $font-down-2;
       }
     }
+  }
 }
