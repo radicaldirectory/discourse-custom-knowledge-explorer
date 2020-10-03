@@ -4,7 +4,8 @@
     grid-template-areas:
         ". search ."
         ". expander ."
-        ". tags .";
+        ". tags ."
+        ". browsing .";
     padding-top: 4em;
 
     .knowledge-explorer-search-wrapper {
@@ -22,6 +23,13 @@
         margin: 0 auto;
         width: initial;
         justify-self: center;
+    }
+
+    .knowledge-explorer-browsing-container {
+      grid-area: browsing;
+      margin: 0 auto;
+      width: initial;
+      justify-self: center;
     }
 
     .knowledge-explorer-tags-top {
