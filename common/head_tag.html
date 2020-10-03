@@ -72,47 +72,45 @@
   {{d-icon "search"}}
 </span>
 
-<div class="knowledge-explorer-expander-container">
-  {{#if expandedFilters}}
-    {{d-button
-      class="knowledge-explorer-expander"
-      icon=(if expandedFilters "angle-up" "angle-down")
-      action=toggleFiltersAction
-      label=(theme-prefix "tagsHide")
-    }}
-  {{else}}
-    {{d-button
-      class="knowledge-explorer-expander"
-      icon=(if expandedFilters "angle-up" "angle-down")
-      action=toggleFiltersAction
-      label=(theme-prefix "tagsShow")
-    }}
-  {{/if}}
-</div>
+{{#if site.mobileView}}
+  <div class="knowledge-explorer-expander-container">
+    {{#if expandedFilters}}
+      {{d-button
+        class="knowledge-explorer-expander"
+        icon=(if expandedFilters "angle-up" "angle-down")
+        action=toggleFiltersAction
+        label=(theme-prefix "tagsHide")
+      }}
+    {{else}}
+      {{d-button
+        class="knowledge-explorer-expander"
+        icon=(if expandedFilters "angle-up" "angle-down")
+        action=toggleFiltersAction
+        label=(theme-prefix "tagsShow")
+      }}
+    {{/if}}
+  </div>
+{{/if}}
 
 {{#if expandedFilters}}
   <div class="knowledge-explorer-items knowledge-explorer-tags-top">
-
-    <a {{action "toggleBrowsingAction"}} class="knowledge-explorer-item knowledge-explorer-tag {{if isBrowsing 'selected'}}">
-      {{#unless isBrowsing}}
-        {{d-icon "plus"}}
-      {{/unless}}
-      {{#if isBrowsing}}
-        {{d-icon "times-circle"}}
-      {{/if}}
-      <span class="knowledge-explorer-item-id tag-id">{{theme-i18n "browsingLabel"}}</span>
-      <span class="knowledge-explorer-item-count tag-count">{{topics.count}}</span>
-    </a>
-
     {{#each tags as |tag|}}
       {{knowledge-explorer-tag
         tag=tag
         selectTag=selectTag
       }}
     {{/each}}
-
   </div>
 {{/if}}
+
+<div class="knowledge-explorer-browsing-container">
+  {{d-button
+    class="knowledge-explorer-browsing"
+    icon=(if isBrowsing "angle-up" "angle-down")
+    action=toggleBrowsingAction
+    label=(theme-prefix "browsingLabel")
+  }}
+</div>
 </script>
 
 <script type="text/x-handlebars" data-template-name="javascripts/components/knowledge-explorer-topic">
