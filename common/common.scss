@@ -6,7 +6,7 @@
         ". expander ."
         ". tags .";
     padding-top: 4em;
-    
+
     .knowledge-explorer-search-wrapper {
       grid-area: search;
       max-width: 500px;
@@ -16,11 +16,14 @@
         font-size: $font-up-4;
       }
     }
-    
+
     .knowledge-explorer-expander-container {
         grid-area: expander;
+        margin: 0 auto;
+        width: initial;
+        justify-self: center;
     }
-    
+
     .knowledge-explorer-tags-top {
       grid-area: tags;
       display: grid;
@@ -103,5 +106,3 @@
       }
     }
 }
-
-
