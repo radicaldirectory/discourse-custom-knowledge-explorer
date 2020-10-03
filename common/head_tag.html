@@ -108,9 +108,8 @@
     <div class="knowledge-explorer-browsing-container">
       {{d-button
         class="knowledge-explorer-browsing"
-        icon=(if isBrowsing "angle-up" "angle-down")
+        icon="ellipsis-h"
         action=toggleBrowsingAction
-        label=(theme-prefix "browsingLabel")
       }}
     </div>
   {{/unless}}
@@ -153,7 +152,7 @@
     toggleBrowsingAction=(action "toggleBrowsing")
     toggleBrowsing=toggleBrowsing
     topics=topics
-    filtered=filtered 
+    filtered=filtered
     isSearching=isSearching
   }}
 
