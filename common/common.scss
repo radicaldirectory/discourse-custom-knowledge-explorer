@@ -47,11 +47,7 @@
 
 .knowledge-explorer-items {
     //padding: 0.57em 1em 1em 0;
-    font-size: $font-down-1;
 
-    @media (max-width: 450px) {
-      font-size: $font-down-3;
-    }
 
     a {
       color: var(--primary, $primary);
