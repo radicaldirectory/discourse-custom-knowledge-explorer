@@ -103,14 +103,16 @@
   </div>
 {{/if}}
 
-<div class="knowledge-explorer-browsing-container">
-  {{d-button
-    class="knowledge-explorer-browsing"
-    icon=(if isBrowsing "angle-up" "angle-down")
-    action=toggleBrowsingAction
-    label=(theme-prefix "browsingLabel")
-  }}
-</div>
+{{#unless filtered}} {{#unless isSearching}}
+  <div class="knowledge-explorer-browsing-container">
+    {{d-button
+      class="knowledge-explorer-browsing"
+      icon=(if isBrowsing "angle-up" "angle-down")
+      action=toggleBrowsingAction
+      label=(theme-prefix "browsingLabel")
+    }}
+  </div>
+{{/unless}} {{/unless}}
 </script>
 
 <script type="text/x-handlebars" data-template-name="javascripts/components/knowledge-explorer-topic">
