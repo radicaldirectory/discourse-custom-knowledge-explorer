@@ -77,13 +77,7 @@
     class="knowledge-explorer-expander"
     icon=(if expandedFilters "angle-up" "angle-down")
     action=toggleFiltersAction
-    label="knowledge_explorer.tags"
-  }}
-  {{d-button
-    class="knowledge-explorer-browsing"
-    icon=(if isBrowsing "angle-up" "angle-down")
-    action=toggleBrowsingAction
-    label=(theme-prefix "browsingLabel")
+    label=(if expandedFilters (theme-prefix "tagsHide") (theme-prefix "tagsShow"))
   }}
 </div>
 
@@ -97,6 +91,15 @@
     {{/each}}
   </div>
 {{/if}}
+
+<div class="knowledge-explorer-expander-container">
+  {{d-button
+    class="knowledge-explorer-browsing"
+    icon=(if isBrowsing "angle-up" "angle-down")
+    action=toggleBrowsingAction
+    label=(theme-prefix "browsingLabel")
+  }}
+</div>
 </script>
 
 <script type="text/x-handlebars" data-template-name="javascripts/components/knowledge-explorer-topic">
