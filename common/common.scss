@@ -8,6 +8,10 @@
   }
 }
 
+.knowledge-explorer {
+  padding: 0 1em;
+}
+
 .knowledge-explorer-search {
     display: grid;
     grid-template-columns: auto minmax(250px, 900px) auto;
@@ -17,12 +21,12 @@
         ". tags ."
         ". browsing .";
     padding-top: 4em;
-    background-color: var(--primary-very-low, $primary-very-low);
+    background-color: var(--primary-low, $primary-low);
 
     .knowledge-explorer-search-wrapper {
       grid-area: search;
       max-width: 500px;
-      margin: 0 auto 2em auto;
+      margin: 0 auto;
       width: 100%;
       .knowledge-explorer-search-bar {
         font-size: $font-up-4;
@@ -47,9 +51,9 @@
       grid-area: tags;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      padding: 2em 0;
+      padding: 3em 0;
       grid-gap: 0.5rem;
-      font-size: $font-up-1;
+      font-size: $font-0;
       @media (max-width: 450px) {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         font-size: $font-down-1;
@@ -88,7 +92,7 @@
         margin-right: 0.25em;
         color: var(--primary-high, $primary-high);
         &.d-icon-plus {
-          height: 0.75em;
+          height: 0.6em;
           margin-right: 0.25em;
         }
       }
@@ -127,5 +131,10 @@
     .discourse-tags {
       font-size: $font-0;
     }
+  }
+  h3.browse-all {
+    font-size: $font-up-5;
+    color: var(--primary-medium, $primary-medium);
+    margin-top: 3em;
   }
 }
