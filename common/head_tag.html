@@ -1,6 +1,12 @@
 <script type="text/discourse-plugin" version="0.8">
+  const discourseComputed = require("discourse-common/utils/decorators").default;
+  const EmberObject = require("@ember/object").default;
+  const KnowledgeExplorer = require("discourse/plugins/discourse-knowledge-explorer/discourse/models/knowledge-explorer");
   api.modifyClass('controller:knowledge-explorer', {
-
+    @discourseComputed("isSearching", "filtered")
+    isBrowsing(isSearching, filtered) {
+      return !isSearching && !filtered;
+    }
   });
 </script>
 
