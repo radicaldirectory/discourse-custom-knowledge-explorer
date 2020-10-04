@@ -1,14 +1,8 @@
 <script type="text/discourse-plugin" version="0.8">
   api.modifyClass('controller:knowledge-explorer', {
-    isBrowsing: false,
-    actions: {
-      toggleBrowsing() {
-		    if (!this.isBrowsing) {
-		      this.set("isBrowsing", true);
-		    } else {
-		      this.set("isBrowsing", false);
-		    }
-	    }
+    @discourseComputed("isSearching", "filtered")
+    isBrowsing(isSearching, filtered) {
+      return !isSearching && !filtered;
     }
   });
 </script>
@@ -103,17 +97,6 @@
   </div>
 {{/if}}
 
-{{#unless filtered}}
-  {{#unless isSearching}}
-    <div class="knowledge-explorer-browsing-container">
-      {{d-button
-        class="knowledge-explorer-browsing"
-        icon="ellipsis-h"
-        action=toggleBrowsingAction
-      }}
-    </div>
-  {{/unless}}
-{{/unless}}
 </script>
 
 <script type="text/x-handlebars" data-template-name="javascripts/components/knowledge-explorer-topic">
@@ -149,12 +132,6 @@
       selectTag=(action "updateSelectedTags")
       expandedFilters=expandedFilters
       toggleFiltersAction=(action "toggleFilters")
-      isBrowsing=isBrowsing
-      toggleBrowsingAction=(action "toggleBrowsing")
-      toggleBrowsing=toggleBrowsing
-      topics=topics
-      filtered=filtered
-      isSearching=isSearching
     }}
   </div>
 
@@ -186,55 +163,19 @@
             {{/if}}
           {{/if}}
 
-          {{#if filtered}}
+          {{#if isBrowsing}}<h3>Or browse all...</h3>{{/if}}
 
-            {{#unless emptyResults}}
-              {{knowledge-explorer-topic-list
-                topics=topics
-                ascending=ascending
-                order=orderColumn
-                sortBy=(action "sortBy")
-                selectTopic=(action "setSelectedTopic")
-                loadMore=(action "loadMore")
-                loading=isLoadingMore
-              }}
-            {{/unless}}
-
-          {{else}}
-
-            {{#if isSearching}}
-
-              {{#unless emptyResults}}
-                {{knowledge-explorer-topic-list
-                  topics=topics
-                  ascending=ascending
-                  order=orderColumn
-                  sortBy=(action "sortBy")
-                  selectTopic=(action "setSelectedTopic")
-                  loadMore=(action "loadMore")
-                  loading=isLoadingMore
-                }}
-              {{/unless}}
-
-            {{else}}
-
-              {{#if isBrowsing}}
-                {{#unless emptyResults}}
-                  {{knowledge-explorer-topic-list
-                    topics=topics
-                    ascending=ascending
-                    order=orderColumn
-                    sortBy=(action "sortBy")
-                    selectTopic=(action "setSelectedTopic")
-                    loadMore=(action "loadMore")
-                    loading=isLoadingMore
-                  }}
-                {{/unless}}
-              {{/if}}
-
-            {{/if}}
-
-          {{/if}}
+          {{#unless emptyResults}}
+            {{knowledge-explorer-topic-list
+              topics=topics
+              ascending=ascending
+              order=orderColumn
+              sortBy=(action "sortBy")
+              selectTopic=(action "setSelectedTopic")
+              loadMore=(action "loadMore")
+              loading=isLoadingMore
+            }}
+          {{/unless}}
 
         </div>
       {{/if}}
