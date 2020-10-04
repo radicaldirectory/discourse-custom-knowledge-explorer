@@ -141,20 +141,22 @@
 <div class="knowledge-explorer">
   {{plugin-outlet name="before-knowledge-explorer-search"}}
 
-  {{knowledge-explorer-search
-    searchTerm=(readonly searchTerm)
-    onSearch=(action "performSearch")
-    tags=tags
-    selectTag=(action "updateSelectedTags")
-    expandedFilters=expandedFilters
-    toggleFiltersAction=(action "toggleFilters")
-    isBrowsing=isBrowsing
-    toggleBrowsingAction=(action "toggleBrowsing")
-    toggleBrowsing=toggleBrowsing
-    topics=topics
-    filtered=filtered
-    isSearching=isSearching
-  }}
+  <div class="{{if isBrowsing 'full-viewport-center'}}">
+    {{knowledge-explorer-search
+      searchTerm=(readonly searchTerm)
+      onSearch=(action "performSearch")
+      tags=tags
+      selectTag=(action "updateSelectedTags")
+      expandedFilters=expandedFilters
+      toggleFiltersAction=(action "toggleFilters")
+      isBrowsing=isBrowsing
+      toggleBrowsingAction=(action "toggleBrowsing")
+      toggleBrowsing=toggleBrowsing
+      topics=topics
+      filtered=filtered
+      isSearching=isSearching
+    }}
+  </div>
 
   {{#conditional-loading-spinner condition=isLoading}}
 

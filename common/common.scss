@@ -1,3 +1,10 @@
+.full-viewport-center {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .knowledge-explorer-search {
     display: grid;
     grid-template-columns: auto minmax(250px, 900px) auto;
