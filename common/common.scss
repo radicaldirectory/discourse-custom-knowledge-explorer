@@ -7,7 +7,7 @@
         ". tags ."
         ". browsing .";
     padding-top: 4em;
-    background-color: var(--highlight-high, $highlight-high);//var(--primary-low, $primary-low);
+    background-color: var(--primary-very-low, $primary-very-low);
 
     .knowledge-explorer-search-wrapper {
       grid-area: search;
