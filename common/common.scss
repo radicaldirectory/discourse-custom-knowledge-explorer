@@ -7,6 +7,7 @@
         ". tags ."
         ". browsing .";
     padding-top: 4em;
+    background-color: $highlight;//var(--primary-low, $primary-low);
 
     .knowledge-explorer-search-wrapper {
       grid-area: search;
@@ -40,7 +41,7 @@
       grid-gap: 0.5rem;
       font-size: $font-up-1;
       @media (max-width: 450px) {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         font-size: $font-down-1;
       }
     }
