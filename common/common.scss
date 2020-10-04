@@ -9,7 +9,7 @@
 }
 
 .knowledge-explorer {
-  padding: 0 1em;
+  padding: 0.5em;
 }
 
 .knowledge-explorer-search {
@@ -29,7 +29,10 @@
       margin: 0 auto;
       width: 100%;
       .knowledge-explorer-search-bar {
-        font-size: $font-up-4;
+        font-size: $font-up-3;
+        @media (max-width: 450px) {
+          font-size: $font-up-1;
+        }
       }
     }
 
@@ -50,12 +53,12 @@
     .knowledge-explorer-tags-top {
       grid-area: tags;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       padding: 3em 0;
       grid-gap: 0.5rem;
       font-size: $font-0;
       @media (max-width: 450px) {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
         font-size: $font-down-1;
       }
     }
@@ -136,5 +139,8 @@
     font-size: $font-up-5;
     color: var(--primary-medium, $primary-medium);
     margin-top: 3em;
+    @media (max-width: 450px) {
+      font-size: $font-up-3;
+    }
   }
 }
