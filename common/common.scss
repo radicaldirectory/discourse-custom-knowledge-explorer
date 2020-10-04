@@ -83,10 +83,10 @@
         }
       }
       &:hover {
-        background: var(--highlight-medium, $highlight-medium);
+        background: var(--tertiary, $tertiary);
       }
       &.selected:hover {
-        background: var(--danger-low, $danger-low);
+        background: var(--danger-medium, $danger-medium);
         .d-icon {
           color: var(--danger, $danger);
         }
