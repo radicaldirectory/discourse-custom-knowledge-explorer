@@ -1,9 +1,6 @@
 <script type="text/discourse-plugin" version="0.8">
   api.modifyClass('controller:knowledge-explorer', {
-    @discourseComputed("isSearching", "filtered")
-    isBrowsing(isSearching, filtered) {
-      return !isSearching && !filtered;
-    }
+
   });
 </script>
 
